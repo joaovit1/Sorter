@@ -1,0 +1,15 @@
+title: 'Configurations'
+attributes:
+  - 'attribute'
+values: 
+  - 'value'  
+evtInfos:
+  - 'evtinfo'  
+orgs:
+  - 'orgID'  
+tags:
+  - 'tag'
+normalKey: 'splunk-key'
+alertKey: 'splunk-alert-key'
+trigger: False
+url: 'splunk collector url'
