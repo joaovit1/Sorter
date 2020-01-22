@@ -67,6 +67,6 @@ url: 'My Splunk URL'
 
 # To Do
 * Create Wiki explaining in more details the steps to use sorter and enable ZeroMQ Plugin in MISP;
-* Evolve tag searches to handle taxonomy.
+* Evolve tag searches to handle taxonomy;
 * Use virtual environment.
 
