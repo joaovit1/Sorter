@@ -2,31 +2,23 @@
 
 Sorter is a python script to watch for new MISP data and sort by chosen conditions
 
-It allows a config file in YAML, which have the following fields:
+It allows a config file in YAML, which have the following fields, separated by MISP fields and configuration fields:
+
+## Configuration Fields
 
 * **title**: Config file title
+* **normalKey**: Splunk key used to send collected data from attributes to splunk
+* **alertKey**: This key is intended to be different from normal key, to send data to other Splunk source, which will trigger an alert
+* **trigger**: Accepts true or false, every element that fit the conditions, will be sent to the Splunk alert source
+* **url**: Splunk url collector
+
+## MISP Fields (These fields accept lists)
+
 * **attributes**: The attribute types you will watch for
 * **values**: The values inside of the attributes, that if found, will send an alert to Splunk
 * **evtInfos**: Search for specific words in event infos, ex: *'OSINT'*
 * **orgs**: Monitor for specific organisations
 * **tags**: Search for specific tags in events
-* **normalKey**: Splunk key used to send normal data
-* **alertKey**: This key is intended to be different from normal key, to send data to other Splunk source, which will trigger an alert
-* **trigger**: Accepts true or false, every element that fit the conditions, will be sent to the Splunk alert source
-* **url**: Splunk url collector
-
-## Accepts Lists
-
-- [ ] Title
-- [x] Attributes
-- [x] Values
-- [x] EvtInfos
-- [x] Orgs
-- [x] Tags
-- [ ] Normal Key
-- [ ] Alert Key
-- [ ] Trigger
-- [ ] URL
 
 # How it works
 
@@ -59,11 +51,3 @@ alertKey: 'My Splunk Alert Key'
 trigger: False
 url: 'My Splunk URL'
 ```
-
-# Dependencies
-
-* [Argparse](https://pypi.org/project/argparse/)
-* [ZeroMQ](https://zeromq.org/languages/python/)
-* [Pprint](https://docs.python.org/3/library/pprint.html)
-* [Requests](https://pypi.org/project/requests/)
-* [PyYAML](https://pypi.org/project/PyYAML/)
