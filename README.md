@@ -15,6 +15,7 @@ These are the available configuration fields:
 * **alertKey**: This key is intended to be different from normal key, sending data to another Splunk source, which can be configured to trigger an alert
 * **trigger**: Accepts true or false. Every element that fit into sorter conditions, will be sent to the Splunk using alert key.
 * **url**: Splunk url collector
+* **index**: Your splunk index that will receive the collected data
 
 ## MISP Fields (These fields accept lists)
 
@@ -63,6 +64,7 @@ normalKey: 'My Splunk Key'
 alertKey: 'My Splunk Alert Key'
 trigger: False
 url: 'My Splunk URL'
+index: 'My Splunk Index'
 ```
 
 # To Do
