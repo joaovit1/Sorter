@@ -31,10 +31,12 @@ alert_token=''
 trigger=''
 #URL
 url=''
+#Splunk Index
+index=''
 
 #Parse YAML configs
 def input_configs(path,info):
-    global attributes,values,evt_infos,orgs,tags,token,alert_token,trigger,title,url
+    global attributes,values,evt_infos,orgs,tags,token,alert_token,trigger,title,url,index
     with open(path, 'r') as stream:
         try:
             data = yaml.safe_load(stream) 
@@ -49,6 +51,7 @@ def input_configs(path,info):
             alert_token = data['alertKey']
             trigger = data['trigger'] if element_verif(data['trigger']) else False
             url = data['url']
+            index = data['index']
             if info:
                 print_info()
         except yaml.YAMLError as exc:
@@ -59,8 +62,8 @@ def configs_verif(data):
     if data == None:
         print("Couldn't find any config")
         quit()
-    if not element_verif(data['normalKey']) or not element_verif(data['alertKey']) or not element_verif(data['url']):
-        print('Normal Key, Alert Key, URL required')
+    if not element_verif(data['normalKey']) or not element_verif(data['alertKey']) or not element_verif(data['url']) or not element_verif(data['index']):
+        print('Splunk Normal Key, Alert Key, URL, index required')
         quit()
 
 #Verify if a config element is empty
@@ -82,7 +85,7 @@ def print_info():
 #Sends data to splunk, each time a attribute with the matching conditions is found
 def splunk_post(value,dataType,eventID,eventInfo,objectID,key):    
     authHeader = {'Authorization': 'Splunk {}'.format(key)}
-    jsonDict = {"index":"main", "event": { "value": value, "dataType": dataType, "eventID": eventID, "eventInfo": eventInfo, "objectID": objectID } }
+    jsonDict = {"index":index, "event": { "value": value, "dataType": dataType, "eventID": eventID, "eventInfo": eventInfo, "objectID": objectID } }
     r = requests.post(url, headers=authHeader, json=jsonDict, verify=False)
     print (r.text)
 

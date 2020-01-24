@@ -13,3 +13,4 @@ normalKey: 'splunk-key'
 alertKey: 'splunk-alert-key'
 trigger: False
 url: 'splunk collector url'
+index: 'splunk-index'
